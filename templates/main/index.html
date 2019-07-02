@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sinoptik</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head>
+<body>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
+    <h5 class="my-0 mr-md-auto font-weight-normal">Sinoptik.ua</h5>
+    <nav class="my-2 my-md-0 mr-md-3">
+        <a class="p-2 text-dark" href="#">Features</a>
+        <a class="p-2 text-dark" href="#">Enterprise</a>
+        <a class="p-2 text-dark" href="#">Support</a>
+        <a class="p-2 text-dark" href="#">Pricing</a>
+    </nav>
+    <a class="btn btn-outline-primary" href="#">Sign up</a>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Weather in your city</h2>
+            <form action="" method="post">
+                {% csrf_token %}
+                <label for="city">City:</label>
+                {{ form.name }}
+                <input type="submit" name="send" value="Check" class="mt-2 btn btn-danger">
+            </form>
+        </div>
+        <div class="col-md-6">
+            <h2>Information</h2>
+            {% for info in all_info %}
+            <div class="alert alert-info">
+                <div class="row">
+                    <div class="col-9">
+                        <b>City: {{ info.city }}</b>/
+                        <b>Country: {{ info.country }}<br></b>
+                        <b>Temperature: {{ info.temperature }}<sup> o</sup>с<br></b>
+                        <b>Pressure: {{ info.pressure }} mm Hg</b>
+                    </div>
+                    <div class="col-2 col-offset-1">
+                        <img src="http://openweathermap.org/img/w/{{ info.icon }}.png" alt="weather pic"
+                             class="img-thumbnail">
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+</body>
+</html>
